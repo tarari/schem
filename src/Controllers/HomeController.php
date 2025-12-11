@@ -6,5 +6,7 @@
         public function index(){
             echo 'HomeController';
         }
-
+        public function login(){
+            echo 'login';
+        }
     }
