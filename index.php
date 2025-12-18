@@ -1,9 +1,11 @@
 <?php
 
 
-    require __DIR__.'/vendor/autoload.php';
 
-    use App\Router;
 
-    $app=new Router();
-    $app->getCleanUri();
+    require __DIR__.'/bootstrap.php';
+
+    use App\Infrastructure\Http\Request;
+    
+    $app->dispatch(new Request());
+   

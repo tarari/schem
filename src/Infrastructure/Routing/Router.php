@@ -1,7 +1,8 @@
 <?php
-    namespace App;
+    namespace App\Infrastructure\Routing;
 
     use App\Infrastructure\Http\Request;
+    use App\Infrastructure\Routing\RouteCollection;
 
     class Router{
         private RouteCollection $routeCollection;
@@ -16,7 +17,9 @@
                 if($route['method'] === strtoupper($request->getMethod())
                     && $this->matchUri($route['path'],$request->getUri(),$params))
                 {
-
+                    [$controllerClass,$action]=$route['handler'];
+                    $controller=new $controllerClass($request);
+                    call_user_func_array([$controller,$action],$params);
                 }
             }
         }

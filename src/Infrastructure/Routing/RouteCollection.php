@@ -1,10 +1,10 @@
 <?php
 
-    namespace App;
+    namespace App\Infrastructure\Routing;
 
     class RouteCollection{
         private array $routes=[];
-        public function add(string $method,string $path,string $handler){
+        public function add(string $method,string $path,callable|array $handler){
             $this->routes[]=[
                 'method'=>strtoupper($method),
                 'path'=>$path,
@@ -17,7 +17,7 @@
             return $this->routes;
         }
 
-        protected function loadFromFile(string $filePath){
+        public function loadFromFile(string $filePath){
             if(!file_exists($filePath)){
                 throw new \Exception("Routes file not found: $filePath"); 
             }

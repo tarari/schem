@@ -4,7 +4,7 @@
 
     class HomeController{
         public function index(){
-            echo 'HomeController';
+            echo 'HomeController-index';
         }
         public function login(){
             echo 'login';
