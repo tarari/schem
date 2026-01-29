@@ -20,8 +20,6 @@ final class DoctrineBookRepository implements IBookRepository{
         $this->em->persist($book);
     }
 
-    public function findAll():array {
-        return $this->em->createQuery('select b from App:books')->getResult();
-    }
+   
 
 } 

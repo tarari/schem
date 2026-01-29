@@ -9,5 +9,5 @@ use App\Domain\Book\BookId;
 interface IBookRepository{
     public function save(Book $book):void;
     public function find(BookId $id):?Book;
-    public function findAll():array;
+    
 }

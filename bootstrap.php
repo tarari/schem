@@ -2,8 +2,9 @@
    
 
     require 'config/constants.php';
-    require 'config/doctrine.php';
-    
+    $entityManager=require 'config/doctrine.php';
+    $em=$entityManager;
+   
     //route definition
     use App\Infrastructure\Routing\Router;
     use App\Infrastructure\Routing\RouteCollection;

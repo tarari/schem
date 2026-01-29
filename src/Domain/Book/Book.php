@@ -1,12 +1,33 @@
 <?php
+
+
     namespace App\Domain\Book;
 
-    class Book{
-        private BookId $id;
-        private string $title;
-        private string $author;
-        private bool $isBorrowed=false;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
 
+
+
+    #[Entity]
+    #[Table(name:'books')]
+    class Book{
+        #[Id]
+        #[Column(type:'string',length:36)]
+        private string $id;
+        #[Column(type:'string')]
+        private string $title;
+        #[Column(type:'string')]
+        private string $author;
+        #[Column(type:'boolean')]
+        private bool $available=true;
+
+        function __construct(BookId $id, string $title)
+        {
+            $this->id=(string)$id;
+            $this->title=$title;
+        }
         
         public function setTitle(string $title):void
         {
@@ -17,19 +38,16 @@
 
         }
 
-        public function getId(){
-            return $this->id;
+        public function id():BookId{
+            return new BookId($this->id);
         }
 
         public function borrow():void{
-            if($this->isBorrowed){
-                throw new \Exception("Book is already borrowed");
+            if(!$this->available){
+                throw new \DomainException('Book not available');
             }
-            $this->isBorrowed=true;
         }
 
-        public function return():void{
-            $this->isBorrowed=false;
-        }
+        
         
     }

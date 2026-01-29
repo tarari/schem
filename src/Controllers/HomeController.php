@@ -5,10 +5,11 @@
 
     use App\Infrastructure\Http\Response;
     use App\Domain\User\User;
+use App\Domain\User\UserId;
 
     class HomeController{
         public function index(){
-            $user=new User("1","Pep","pep@pep.com");
+            $user=new User(new UserId('usu1'),'Pepe','pepe@gmail.com');
 /*
             $response=new Response();
             $respJson=$response->json(['user'=>$user],200);

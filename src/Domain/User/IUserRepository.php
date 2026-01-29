@@ -8,5 +8,5 @@ use App\Domain\User\UserId;
 interface IUserRepository{
     public function save(User $user):void;
     public function findById(UserId $id):?User;
-    public function findAll():array;
+    
 }

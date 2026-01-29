@@ -1,12 +1,18 @@
 <?php
  namespace App\Application\Services\BorrowBook;
 
+use RuntimeException;
 use App\Domain\Book\BookId;
 use App\Domain\Book\IBookRepository;
-use RuntimeException;
+use App\Domain\Loan\ILoanRepository;
+use App\Domain\User\IUserRepository;
 
     final class BorrowBookHandler{
-        public function __construct(private IBookRepository $repository)
+        public function __construct(
+            private IBookRepository $bookRepository,
+            private IUserRepository $userRepository,
+            private ILoanRepository $loanRepository            
+            )
         {
 
         }
@@ -14,7 +20,7 @@ use RuntimeException;
         public function handle(BorrowBookCommand $command){
             //buscar book en repositorio
             // marcar que está prestado
-            $book=$this->repository->find(
+            $book=$this->bookRepository->find(
                 new BookId($command->bookId)
             );
             
@@ -22,7 +28,7 @@ use RuntimeException;
                 throw new RuntimeException("Book not found");
             }
             $book->borrow();
-            $this->repository->save($book);
+            $this->bookRepository->save($book);
             
         }
 

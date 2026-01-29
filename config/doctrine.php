@@ -4,7 +4,7 @@
     use Doctrine\ORM\EntityManager;
     use Doctrine\ORM\ORMSetup;
     use Doctrine\DBAL;
-    
+        
     return function(): EntityManager{
         $paths= [__DIR__ . '/../src/Domain'];
         $isDevMode= true;
@@ -15,7 +15,7 @@
 
         $config->enableNativeLazyObjects(true);
         $dbParams = [
-            'driver'   => $_ENV['DB_DRIVER'] ?? 'pdo_mysql',
+            'driver'   => $_ENV['DB_DRIVER'],
             'host'     =>$_ENV['DB_HOST'],
             'port'     =>$_ENV['DB_PORT'],
             'unix_socket'=>'/run/mysqld/mysqld.sock',
